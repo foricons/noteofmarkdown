@@ -454,19 +454,13 @@ var result=reg.test("strings");
 
 
 # DOM  
-Document Object Model  
+## Document Object Model  
 文档对象模型，通过DOM可以来任意来修改网页中各个内容  
-文档  
- 文档指的是网页，一个网页就是一个文档  
-对象  
- 对象指将网页中的每一个节点都转换为对象  
-	转换完对象以后，就可以以一种纯面向对象的形式来操作网页了  
-模型  
- 模型用来表示节点和节点之间的关系，方便操作页面  
-节点（Node）  
- 节点是构成网页的最基本的单元，网页中的每一个部分都可以称为是一个节点  
- 虽然都是节点，但是节点的类型却是不同的  
- 常用的节点  
+文档： 文档指的是网页，一个网页就是一个文档  
+对象： 对象指将网页中的每一个节点都转换为对象，转换完对象以后，就可以以一种纯面向对象的形式来操作网页了  
+模型  ：模型用来表示节点和节点之间的关系，方便操作页面  
+节点（Node） ： 节点是构成网页的最基本的单元，网页中的每一个部分都可以称为是一个节点  
+ 常用的节点类型
 	 文档节点 （Document），代表整个网页  
 	 元素节点（Element），代表网页中的标签  
 	 属性节点（Attribute），代表标签中的属性  
@@ -474,18 +468,41 @@ Document Object Model
 	  
 
 ## DOM操作  
-
  DOM查询  
- 在网页中浏览器已经为我们提供了**document对象**，  
-	**它代表的是整个网页，它是window对象的属性，可以在页面中直接使用。**  
+ 在网页中浏览器已经为我们提供了**document对象（它代表的是整个网页，它是window对象的属性，可以在页面中直接使用。）**，  
  document查询方法：  
-	 根据元素的id属性查询一个元素节点对象：  
-		 document.getElementById("id属性值");  
-	 根据元素的name属性值查询一组元素节点对象:  
-		 document.getElementsByName("name属性值");  
-	 根据标签名来查询一组元素节点对象：  
-		 document.getElementsByTagName("标签名");  
-		  
+1. 根据元素的id属性查询一个元素节点对象：document.getElementById("id属性值");  
+2. 根据元素的name属性值查询一组元素节点对象: document.getElementsByName("name属性值");  
+3. 根据标签名来查询一组元素节点对象：document.getElementsByTagName("标签名"); 
+4. ele.innerHTML  
+	 使用该属性可以获取或设置元素内部的HTML代码，对于自结束标签没有意义。例如<input />;
+5. ele.className:得到className  
+例子： 
+```javascript  
+<script>  
+    window.onload = function(){  
+		//查找所有的li标签
+		var lis=document.getElementByTagName("li");
+		alert(lis.lenth);
+		for(var i=0;i<lis.lenth;i++)
+		{
+			alert(lis[i].innerHTML);
+		}
+		var listests=document.getElementsByName("listest");
+        //查找Id为btn的标签
+		var btn = document.getElementById("btn");  
+        btn.onclick = function(){
+			//修改按钮上面的文字 
+			btn.innerHTML="test";
+        };  
+
+    };  
+</script>	
+<button id="btn">innerHTML修改的数据</button>
+<li name="listest">li标签</li>    
+<li name="listest">li标签</li>    
+<li name="listest">li标签</li>    
+```		  
  元素的属性：  
 	 **读取元素的属性：**  
 		语法：元素.属性名  
@@ -494,74 +511,30 @@ Document Object Model
 			  ele.value   
 			  ele.className  
 			注意：class属性不能采用这种方式，  
-			**读取class属性时需要使用 元素.classNam**e	   
+			**读取class属性时需要使用 元素.classNam**e	   	  
 
-修改元素的属性：  
-	语法：元素.属性名 = 属性值  
-	  
- innerHTML  
-	 使用该属性可以获取或设置元素内部的HTML代码  
 
-## 事件（Event）  
-
- 事件指的是用户和浏览器之间的交互行为。比如：点击按钮、关闭窗口、鼠标移动。。。  
- 我们可以为事件来绑定回调函数来响应事件。  
- 绑定事件的方式：  
-	1.可以在标签的事件属性中设置相应的JS代码  
-		例子：  
-
+## 事件（Event）   
+例子：  
 ```javascript  
+// 1. 可以在标签的事件属性中设置相应的JS代码  
 <button onclick="js代码。。。">按钮</button>  
-```
 
-2.可以通过为对象的指定事件属性设置回调函数的形式来处理事件  
-	例子：  
-
-```javascript  
+// 2.可以通过为对象的指定事件属性设置回调函数的形式来处理事件  
 <button id="btn">按钮</button>  
 <script>  
     var btn = document.getElementById("btn");  
     btn.onclick = function(){  
-  
+		//js代码。。。;
     };  
 </script>  
 ```
-
-文档的加载  
- 浏览器在加载一个页面时，是按照自上向下的顺序加载的，加载一行执行一行。  
- 如果将js代码编写到页面的上边，当代码执行时，页面中的DOM对象还没有加载，  
-	此时将会无法正常获取到DOM对象，导致DOM操作失败。  
- 解决方式一：  
-	 可以将js代码编写到body的下边  
-	  
-
-```javascript  
-<body>  
-		<button id="btn">按钮</button>  
-  
-		<script>  
-			var btn = document.getElementById("btn");  
-			btn.onclick = function(){  
-		  
-			};  
-	</script>  
-</body>  
-```
-
  解决方式二：  
 	 将js代码编写到window.onload = function(){}中  
 	 window.onload 对应的回调函数会在整个页面加载完毕以后才执行，  
 		所以可以确保代码执行时，DOM对象已经加载完毕了		  
 
-```javascript  
-<script>  
-    window.onload = function(){  
-        var btn = document.getElementById("btn");  
-        btn.onclick = function(){  
-        };  
-    };  
-</script>	    
-```
+
 
 ## DOM查询  
 
@@ -1606,3 +1579,5 @@ copy() {
     document.body.removeChild(input);  
 }  
 ```
+
+  **[github笔记下载地址](https://github.com/codeOflI/codeOflI.github.io/blob/dev/source/_posts/js-note/javaScript/javaScript.md)**
