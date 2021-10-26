@@ -533,18 +533,17 @@ var result=reg.test("strings");
 	 将js代码编写到window.onload = function(){}中  
 	 window.onload 对应的回调函数会在整个页面加载完毕以后才执行，  
 		所以可以确保代码执行时，DOM对象已经加载完毕了		  
-
+  
 
 
 ## DOM查询  
 
-通过具体的元素节点来查询  
-元素.getElementsByTagName()  
+1. 通过具体的元素节点来查询  :元素.getElementsByTagName()  
 通过标签名查询当前元素的指定后代元素  
 
 **子节点包括便签元素中的文本，子元素自包含标签元素**  
 
-元素.childNodes  
+2. 元素.childNodes  
  获取当前元素的**所有子节点**  
  **会获取到空白的文本子节点**  
 
@@ -553,31 +552,31 @@ childNodes属性会获取包括文本节点在呢的所有节点
   注意：在IE8及以下的浏览器中，不会将空白文本当成子节点，  
 	所以该属性在IE8中会返回4个子元素而其他浏览器是9个  
 
-元素.children  
+3. 元素.children  
  获取当前元素的**所有子元素**  
 
-元素.firstChild  
+4. 元素.firstChild  
  获取当前元素的**第一个子节点**，会获取到空白的文本子节点  
 
-元素.lastChild  
+5.  元素.lastChild  
  获取当前元素的**最后一个子节点**  
 
-元素.parentNode  
+6. 元素.parentNode  
  获取当前元素的父元素  
 
-元素.previousSibling  
+7. 元素.previousSibling  
  获取当前元素的前一个兄弟节点  
 
 previousElementSibling获取前一个兄弟元素，IE8及以下不支持  
 
-元素.nextSibling  
+8. 元素.nextSibling  
  获取当前元素的后一个兄弟节点  
 
 firstElementChild获取当前元素的第一个子元素  
  firstElementChild不支持IE8及以下的浏览器，  
 	如果需要兼容他们尽量不要使用  
 
-innerHTML和innerText  
+9. innerHTML和innerText  
 这两个属性并没有在DOM标准定义，但是大部分浏览器都支持这两个属性  
 两个属性作用类似，都可以获取到标签内部的内容，  
 **不同是innerHTML会获取到html标签，而innerText会自动去除标签**  
@@ -587,29 +586,27 @@ innerHTML和innerText
 
 </h1>h1中的文本内容</h1>  
 
-元素.firstChild.nodeValue  
+10. 元素.firstChild.nodeValue  
 
-## document对象的其他的属性和方法  
+### document对象的其他的属性和方法  
 
-document.all  
- **获取页面中的所有元素**，相当于document.getElementsByTagName("*");  
 
-document.documentElement  
+11. document.documentElement  
  **获取页面中html根元素**  
 
-document.body  
+12. document.body  
  获取页面中的body元素  
 
-document.getElementsByClassName()  
+13. document.getElementsByClassName()  
  **根据元素的class属性值查询一组元素节点对象**  
  这个方法不支持IE8及以下的浏览器  
 
-document.querySelector()  
+14. document.querySelector()  
  **根据CSS选择器去页面中查询一个元素**  
  如果匹配到的元素有多个，则它会返回查询到的第一个元素	  
 
-document.querySelectorAll()	  
- 根据CSS选择器去页面中查询一组元素  
+15 . document.querySelectorAll()	  
+
  会将匹配到所有元素封装到一个数组中返回，即使只匹配到一个  
 
 ##  DOM修改  
